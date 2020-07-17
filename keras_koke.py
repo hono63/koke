@@ -82,17 +82,17 @@ def learn_model(model, X_train, y_train, epochs):
     results = model.fit(X_train, y_train, validation_split=0.2, epochs=epochs )
 
     model_json_str = model.to_json()
-    open('mnist_mlp_model.json', 'w').write(model_json_str)
-    model.save_weights('mnist_mlp_weights.h5')
+    open('koke_mlp_model.json', 'w').write(model_json_str)
+    model.save_weights('koke_mlp_weights.h5')
 
     return results
 
 def load_model():
     model = None
-    with open('mnist_mlp_model.json', 'r') as f:
+    with open('koke_mlp_model.json', 'r') as f:
         json_str = f.read()
         model = model_from_json(json_str)
-        model.load_weights('mnist_mlp_weights.h5')
+        model.load_weights('koke_mlp_weights.h5')
     return model
 
 def show_graph(results, epochs):
