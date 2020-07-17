@@ -72,6 +72,11 @@ def create_cnn(folder):
     return model, X_train, y_train
 
 def learn_model(model, X_train, y_train, epochs):
+    """Learn CNN model.
+    * 0.01 sec / epoch @ Desktop PC with GPU. CUDA10.1
+    * 1.1  sec / epoch @ Desktop PC without GPU.
+    * 6    sec / epoch @ Macbook Pro.
+    """
     optimizers ="Adadelta"
     model.compile(loss='categorical_crossentropy', optimizer=optimizers, metrics=['accuracy'])
     results = model.fit(X_train, y_train, validation_split=0.2, epochs=epochs )
@@ -131,7 +136,7 @@ def show_model(model):
     print("Saved model image: [model.png]")
 
 if __name__ == "__main__":
-    if 0:
+    if 1:
         folder = os.listdir(os.path.join(THIS_FILE, "cnn"))
         model, X_train, y_train = create_cnn(folder)
         results = learn_model(model, X_train, y_train, EPOCH_NUM)
@@ -139,10 +144,12 @@ if __name__ == "__main__":
     else:
         model = load_model()
     show_model(model)
+    for imgfile in glob.glob(os.path.join(THIS_FILE, "predict", "*.jpg")):
+        predict_img(imgfile, model)
     #predict_img("haigoke_sample.jpeg", model)
     #predict_img("kamojigoke_sample.jpeg", model)
     #predict_img("my_haigoke_trim.jpg", model)
-    predict_img("haigoke_on_tatami_trim.jpg", model)
-    predict_img("wet_haigoke.jpg", model)
-    predict_img("my_kamoji1.jpg", model)
-    predict_img("my_kamoji2.jpg", model)
+    #predict_img("haigoke_on_tatami_trim.jpg", model)
+    #predict_img("wet_haigoke.jpg", model)
+    #predict_img("my_kamoji1.jpg", model)
+    #predict_img("my_kamoji2.jpg", model)
