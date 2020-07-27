@@ -4,6 +4,7 @@ Gets to 99.25% test accuracy after 12 epochs
 5 sec/epoch on GeForce 1660 Super.
 35 sec/epoch on WSL (Ryzen 3700x) without GPU
 100 sec/epoch on MacBook Pro 2013 CPU.
+!!! This code is for tensorflow 1.x !!!
 '''
 
 from __future__ import print_function
